@@ -16,7 +16,7 @@
 		<!-- Content here -->
 		<!-- topnav -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">电子账簿</a>
+			<a class="navbar-brand" href="#">材料计算器</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -54,19 +54,56 @@
 		<!--新增表单  -->
 		<form style="margin-bottom: 30px; margin-top: 30px;"
 			class="needs-validation" novalidate>
+			
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputLength">长（毫米）</label> <input type="text"
-						class="form-control form-control-lg" id="inputLength" name="length" pattern="^[1-9]+[0-9]*$" required>
+					<label for="inputShape">形状选择</label> <select onchange="change_shape(this.value)" id="inputShape" name="shape"
+						class="form-control  form-control-lg" required>
+						<option selected value="yuanbangliao">圆棒料</option>
+						<option value="yuanguanliao">圆管料</option>
+						<option value="banliao">板料</option>
+						<option value="fangguan">方管</option>
+						<option value="liujiaobang">六角棒</option>
+					</select>
+					<div class="invalid-feedback">必填</div>
+				</div>
+				
+			   <div class="form-group col-md-6">
+				<label for="inputMaterial">材料选择</label> <select onchange="change_material(this.value)" id="inputMaterial" name="material"
+					class="form-control  form-control-lg" required>
+					<option selected value="7.85">碳钢：7.85g/cm3</option>
+					<option value="7.9">不锈钢：7.9g/cm3</option>
+					<option value="2.8">硬铝：2.8g/cm3</option>
+					<option value="8.5">黄铜：8.5g/cm3</option>
+					<option value="8.9">紫铜：8.9g/cm3</option>
+				</select>
+				<div class="invalid-feedback">必填</div>
+			</div>
+			</div>
+			<!--形状大小 -->
+			<div class="form-row" id="idshapeSize">
+				<div class="form-group col-md-6">
+					<label for="inputChangdu">长度（毫米）</label> <input type="text"
+						class="form-control form-control-lg" id="inputChangdu" name="changdu" pattern="^[1-9]+[0-9]*$" required>
 					<div class="invalid-feedback">必填，数字类型，单位是毫米</div>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputWidth">宽（毫米）</label> <input type="text"
-						class="form-control  form-control-lg" id="inputWidth" name="width" pattern="^[1-9]+[0-9]*$" required>
+					<label for="inputWaijing">外径（毫米）</label> <input type="text"
+						class="form-control  form-control-lg" id="inputWaijing" name="waijing" pattern="^[1-9]+[0-9]*$" required>
 					<div class="invalid-feedback">必填，数字类型，单位是毫米</div>
 				</div>
 				
 			</div>
+			<!-- 比重 -->
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="inputDensity">密度（g/cm3）</label> <input type="text"
+						class="form-control form-control-lg" id="inputDensity" name="density" pattern="^[1-9]+[0-9]*$" required>
+					<div class="invalid-feedback">必填</div>
+				</div>				
+			</div>
+
+
 			
 			<div class="form-row">
 			<div class="form-group col-md-6">
@@ -80,51 +117,7 @@
 					<div class="invalid-feedback">必填</div>
 				</div>
 			</div>
-
-			<div class="form-row">
-
-<!-- 				<div class="form-group col-md-6">
-					<label for="inputPecifications">规格型号</label><select id="inputPecifications" name="specifications"
-						class="form-control  form-control-lg" required>
-						<option selected disabled value="">请选择规格</option>
-						<option>规格1</option>
-						<option>规格2</option>
-					</select>
-					<div class="invalid-feedback">必填</div>
-				</div> -->
-
-				<div class="form-group col-md-6">
-					<label for="inputShape">形状选择</label> <select id="inputShape" name="Shape"
-						class="form-control  form-control-lg" required>
-						<option selected disabled value="">请选择材料</option>
-						<option>A3</option>
-						<option>45</option>
-						<option>40Gr</option>
-						<option>不锈钢</option>
-						<option>青铜</option>
-						<option>紫铜</option>
-						<option>铝</option>
-					</select>
-					<div class="invalid-feedback">必填</div>
-				</div>
-				<div class="form-group col-md-6">
-					<label for="inputMaterial">材料</label> <select id="inputMaterial" name="material"
-						class="form-control  form-control-lg" required>
-						<option selected disabled value="">请选择材料</option>
-						<option>A3</option>
-						<option>45</option>
-						<option>40Gr</option>
-						<option>不锈钢</option>
-						<option>青铜</option>
-						<option>紫铜</option>
-						<option>铝</option>
-					</select>
-					<div class="invalid-feedback">必填</div>
-				</div>
-				
-				
-			</div>
-
+			
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="inputNum">数量</label> <input type="text"
@@ -181,6 +174,35 @@
     });
   }, false);
 })();
+
+
+var shapeMap=new Map();
+shapeMap.set("fangguan",[
+	{"flag":"changdu","name":"长度"},
+	{"flag":"kuandu","name":"宽度"},
+	{"flag":"gaodu","name":"高度"},
+	{"flag":"neikuan","name":"内宽"},
+	{"flag":"neigao","name":"内高"}
+	]);
+shapeMap.set("yuanbangliao",[
+	{"flag":"changdu","name":"长度"},
+	{"flag":"waijing","name":"外径"}
+	]);
+function change_material(newVal){
+	$("#inputDensity").val(newVal)
+}
+function change_shape(newVal){
+	//idshapeSize
+	var sizeEle = shapeMap.get(newVal); 
+	if(!!sizeEle){
+		var sizeHtml = "";
+		for(var i = 0;i<sizeEle.length;i++){
+			sizeHtml +='<div class="form-group col-md-6"> <label for="input_'+sizeEle[i].flag+'">'+sizeEle[i].name+'（毫米）</label> <input type="text" class="form-control form-control-lg" id="input_'+sizeEle[i].flag+'" name="'+sizeEle[i].flag+'" pattern="^[1-9]+[0-9]*$" required> <div class="invalid-feedback">必填，数字类型，单位是毫米</div> </div>'
+		}
+		$("#idshapeSize").html(sizeHtml)
+	}
+}
+
 </script>		
 </body>
 </html>
