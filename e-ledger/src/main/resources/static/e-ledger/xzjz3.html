@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/style/dist/css/formValidation.css">
+<title>新增记账</title>
+</head>
+<body>
+	<div class="container">
+		<!-- Content here -->
+		<!-- topnav -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">电子账簿</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" href="#">账单
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">记账</a></li>
+					<!-- <li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Dropdown </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Action</a> <a
+								class="dropdown-item" href="#">Another action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#"
+						tabindex="-1" aria-disabled="true">Disabled</a></li> -->
+				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+
+		<!--新增表单  -->
+		<form id="form" style="margin-bottom: 30px; margin-top: 30px;"
+			class="needs-validation" novalidate>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label for="inputEmail4">长（毫米）</label> <input type="text"
+						class="form-control form-control-lg" id="inputlength" required>
+					<div class="valid-feedback">Looks good!</div>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputPassword4">宽（毫米）</label> <input type="text"
+						class="form-control  form-control-lg" id="inputwidth" required>
+					<div class="valid-feedback">Looks good!</div>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inputEmail4">高（毫米）</label> <input type="text"
+						class="form-control form-control-lg" id="inputEmail4" required>
+					<div class="invalid-feedback">Please provide a valid city.</div>
+				</div>
+			</div>
+
+			<div class="form-row">
+
+				<div class="form-group col-md-6">
+					<label for="inputPassword4">规格型号</label><select id="inputState"
+						class="form-control  form-control-lg" required>
+						<option selected disabled value="">请选择规格</option>
+						<option>规格1</option>
+						<option>规格2</option>
+					</select>
+					<div class="invalid-feedback">Please select a valid state.</div>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="inputAddress">材料</label> <select id="inputState"
+						class="form-control  form-control-lg" required>
+						<option selected disabled value="">请选择材料</option>
+						<option>材料1</option>
+						<option>材料2</option>
+					</select>
+					<div class="invalid-feedback">Please select a valid state.</div>
+				</div>
+			</div>
+
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="inputAddress2">数量</label> <input type="text"
+						class="form-control  form-control-lg" id="inputAddress2"
+						placeholder="Apartment, studio, or floor" required>
+					<div class="invalid-feedback">Please select a valid state.</div>
+				</div>
+				<div class="form-group col-md-6">
+					<label for="inputCity">单价</label> <input type="text"
+						class="form-control  form-control-lg" id="inputCity" required>
+						<div class="invalid-feedback">Please select a valid state.</div>
+				</div>
+				
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-2">
+					<label for="inputZip">总价</label> <input type="text"
+						class="form-control  form-control-lg" id="inputZip">
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary">保存</button>
+		</form>
+
+
+	</div>
+
+
+
+
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/style/dist/js/es6-shim.min.js"></script>
+	<script type="text/javascript" src="/style/dist/js/formValidation.js"></script>
+	
+	
+		
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function(e) {
+    // Generate a simple captcha
+    /* const randomNumber = function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    con st random = [randomNumber(1, 100), randomNumber(1, 200)];*/
+    //document.getElementById('captchaOperation').innerHTML = [random[0], '+', random[1], '='].join(' ');
+    /*length
+    width
+    height
+    specifications
+    material
+    num
+    price
+    totalPrice  */
+    const form = document.getElementById('form');
+    FormValidation.formValidation(form, {
+        fields: {
+        	length: {
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    }
+                }
+            },
+            width: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    }
+                }
+            },
+            height: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The username can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            specifications: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            material: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    },
+                    stringLength: {
+                        min: 8,
+                        message: 'The password must have at least 8 characters'
+                    },
+                    different: {
+                        message: 'The password cannot be the same as username',
+                        compare: function() {
+                            return form.querySelector('[name="username"]').value;
+                        }
+                    }
+                }
+            },
+            num: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            price: {
+                validators: {
+                    callback: {
+                        message: 'Wrong answer',
+                        callback: function(input) {
+                            const items = document.getElementById('captchaOperation').innerHTML.split(' ');
+                            const sum = parseInt(items[0]) + parseInt(items[2]);
+                            return input.value == sum;
+                        }
+                    }
+                }
+            },
+            totalPrice: {
+                validators: {
+                    notEmpty: {
+                        message: 'You must agree with the terms and conditions'
+                    }
+                }
+            }
+        }
+    //,
+        /* plugins: {
+            //trigger: new FormValidation.plugins.Trigger(),
+           // tachyons: new FormValidation.plugins.Tachyons(),
+            submitButton: new FormValidation.plugins.SubmitButton(),
+            icon: new FormValidation.plugins.Icon({
+                valid: 'fa fa-check',
+                invalid: 'fa fa-times',
+                validating: 'fa fa-refresh'
+            }),
+        } */
+    });  
+});
+</script>		
+</body>
+</html>
