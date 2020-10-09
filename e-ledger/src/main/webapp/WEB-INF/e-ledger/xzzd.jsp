@@ -31,7 +31,7 @@
 							<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">记账</a></li>
-					<!-- <li class="nav-item dropdown"><a
+			<!-- 		<!-- <li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> Dropdown </a>
@@ -42,7 +42,7 @@
 							<a class="dropdown-item" href="#">Something else here</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#"
-						tabindex="-1" aria-disabled="true">Disabled</a></li> -->
+						tabindex="-1" aria-disabled="true">Disabled</a></li> --> -->
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="search"
@@ -59,22 +59,22 @@
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputTuzhimingcheng">名称</label> <input type="text"
-						class="form-control form-control-lg" id="inputTuzhimingcheng"
+					<label for="input_tuzhimingcheng">名称</label> <input type="text"
+						class="form-control form-control-lg" id="input_tuzhimingcheng"
 						name="tuzhimingcheng" placeholder="图纸名称" required>
 					<div class="invalid-feedback">必填</div>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputPrice">图号</label> <input type="text"
-						class="form-control form-control-lg" id="inputPrice" name="price"
+					<label for="input_tuzhibianhao">图号</label> <input type="text"
+						class="form-control form-control-lg" id="input_tuzhibianhao" name="tuzhibianhao"
 						placeholder="图纸编号" required>
 					<div class="invalid-feedback">必填</div>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputShape">形状选择</label> <select
-						onchange="change_shape(this.value)" id="inputShape" name="shape"
+					<label for="input_xingzhuang">形状选择</label> <select
+						onchange="change_shape(this.value)" id="input_xingzhuang" name="xingzhuang"
 						class="form-control  form-control-lg" required>
 						<option selected value="yuanbangliao">圆棒料</option>
 						<option value="yuanguanliao">圆管料</option>
@@ -87,9 +87,9 @@
 
 				<div class="form-group row col-md-6">
 					<div class="col-md-6">
-						<label for="inputMaterial">材料选择</label> <select
-							onchange="change_material(this.value)" id="inputMaterial"
-							name="material" class="form-control  form-control-lg" required>
+						<label for="input_cailiao">材料选择</label> <select
+							onchange="change_material(this.value)" id="input_cailiao"
+							name="cailiao" class="form-control  form-control-lg" required>
 							<option selected value="7.85">碳钢：7.85g/cm3</option>
 							<option value="7.9">不锈钢：7.9g/cm3</option>
 							<option value="2.8">硬铝：2.8g/cm3</option>
@@ -99,9 +99,9 @@
 						<div class="invalid-feedback">必填</div>
 					</div>
 					<div class="col-md-6">
-						<label for="inputDensity">密度（g/cm3）</label> <input type="text"
-							class="form-control form-control-lg" id="inputDensity"
-							name="density" pattern="^[0-9.]+[0-9]*$" required>
+						<label for="input_midu">密度（g/cm3）</label> <input type="text"
+							class="form-control form-control-lg" id="input_midu"
+							name="midu" pattern="^[0-9.]+[0-9]*$" required>
 						<div class="invalid-feedback">必填</div>
 					</div>
 				</div>
@@ -126,14 +126,14 @@
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputNum">数量</label> <input type="number"
-						class="form-control  form-control-lg" id="inputNum" name="num"
+					<label for="input_shuliang">数量</label> <input type="number"
+						class="form-control  form-control-lg" id="input_shuliang" name="shuliang"
 						pattern="^[1-9]+[0-9]*$" required>
 					<div class="invalid-feedback">必填</div>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputPrice">单价</label> <input type="text"
-						class="form-control  form-control-lg" id="inputPrice" name="price"
+					<label for="input_danjia">单价</label> <input type="text"
+						class="form-control  form-control-lg" id="input_danjia" name="danjia"
 						pattern="^[0-9.]+[0-9]*$" required>
 					<div class="invalid-feedback">必填，只能填数字或者带小数点的数字</div>
 				</div>
@@ -165,9 +165,9 @@
 				</div>
 				<!--tip 总价和单价自动转换为汉字大写  -->
 			</div>
-			<button type="button" class="btn btn-outline-dark">计算</button>
+			<button type="button" class="btn btn-outline-dark mr-3">计算</button>
 			<span></span>
-			<button type="submit" class="btn btn-primary">保存</button>
+			<button type="submit" class="btn btn-primary ml-3">保存</button>
 		</form>
 
 
