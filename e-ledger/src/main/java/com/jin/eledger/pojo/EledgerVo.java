@@ -2,13 +2,13 @@ package com.jin.eledger.pojo;
 
 import java.util.Date;
 
-public class Eledger {
+public class EledgerVo {
 	private String ledgerId;
 	private String tuzhibianhao;
 	private String tuzhimingcheng;
-	private Short xingzhuang;
+	private String xingzhuang;
 	private String guige;
-	private Short cailiao;
+	private Byte cailiao;
 	private String midu;
 	private Integer shuliang;
 	private String danjia;
@@ -54,22 +54,24 @@ public class Eledger {
 	public void setTuzhimingcheng(String tuzhimingcheng) {
 		this.tuzhimingcheng = tuzhimingcheng;
 	}
-	public Short getXingzhuang() {
-		return xingzhuang;
-	}
-	public void setXingzhuang(Short xingzhuang) {
-		this.xingzhuang = xingzhuang;
-	}
+ 
 	public String getGuige() {
 		return guige;
 	}
 	public void setGuige(String guige) {
 		this.guige = guige;
 	}
-	public Short getCailiao() {
+ 
+	public String getXingzhuang() {
+		return xingzhuang;
+	}
+	public void setXingzhuang(String xingzhuang) {
+		this.xingzhuang = xingzhuang;
+	}
+	public Byte getCailiao() {
 		return cailiao;
 	}
-	public void setCailiao(Short cailiao) {
+	public void setCailiao(Byte cailiao) {
 		this.cailiao = cailiao;
 	}
 	public String getMidu() {

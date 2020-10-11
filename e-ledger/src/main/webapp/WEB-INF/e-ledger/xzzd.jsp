@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,10 +10,12 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/style/dist/css/bootstrap.min.css">
 
+ 
 <title>材料计算器</title>
 </head>
 <body>
 	<div class="container">
+ 
 		<!-- Content here -->
 		<!-- topnav -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,7 +33,7 @@
 							<span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">记账</a></li>
-			<!-- 		<!-- <li class="nav-item dropdown"><a
+					<!-- 		<!-- <li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> Dropdown </a>
@@ -42,7 +44,7 @@
 							<a class="dropdown-item" href="#">Something else here</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#"
-						tabindex="-1" aria-disabled="true">Disabled</a></li> --> -->
+						tabindex="-1" aria-disabled="true">Disabled</a></li> -->
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="search"
@@ -54,8 +56,12 @@
 
 		<!--新增表单  -->
 		<form style="margin-bottom: 30px; margin-top: 30px;"
-			class="needs-validation" novalidate>
-
+			class="needs-validation" novalidate action="save" method="post">
+			<!-- 提醒 -->
+  <div class="alert alert-success alert-dismissible fade show" style="display:none">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>成功!</strong> 指定操作成功提示信息。
+  </div>
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -66,16 +72,16 @@
 				</div>
 				<div class="form-group col-md-6">
 					<label for="input_tuzhibianhao">图号</label> <input type="text"
-						class="form-control form-control-lg" id="input_tuzhibianhao" name="tuzhibianhao"
-						placeholder="图纸编号" required>
+						class="form-control form-control-lg" id="input_tuzhibianhao"
+						name="tuzhibianhao" placeholder="图纸编号" required>
 					<div class="invalid-feedback">必填</div>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="input_xingzhuang">形状选择</label> <select
-						onchange="change_shape(this.value)" id="input_xingzhuang" name="xingzhuang"
-						class="form-control  form-control-lg" required>
+						onchange="change_shape(this.value)" id="input_xingzhuang"
+						name="xingzhuang" class="form-control  form-control-lg" required>
 						<option selected value="yuanbangliao">圆棒料</option>
 						<option value="yuanguanliao">圆管料</option>
 						<option value="banliao">板料</option>
@@ -90,18 +96,18 @@
 						<label for="input_cailiao">材料选择</label> <select
 							onchange="change_material(this.value)" id="input_cailiao"
 							name="cailiao" class="form-control  form-control-lg" required>
-							<option selected value="7.85">碳钢：7.85g/cm3</option>
-							<option value="7.9">不锈钢：7.9g/cm3</option>
-							<option value="2.8">硬铝：2.8g/cm3</option>
-							<option value="8.5">黄铜：8.5g/cm3</option>
-							<option value="8.9">紫铜：8.9g/cm3</option>
+							<option selected value="1">碳钢：7.85g/cm3</option>
+							<option value="2">不锈钢：7.9g/cm3</option>
+							<option value="3">硬铝：2.8g/cm3</option>
+							<option value="4">黄铜：8.5g/cm3</option>
+							<option value="5">紫铜：8.9g/cm3</option>
 						</select>
 						<div class="invalid-feedback">必填</div>
 					</div>
 					<div class="col-md-6">
 						<label for="input_midu">密度（g/cm3）</label> <input type="text"
-							class="form-control form-control-lg" id="input_midu"
-							name="midu" pattern="^[0-9.]+[0-9]*$" required>
+							class="form-control form-control-lg" id="input_midu" name="midu"
+							pattern="^[0-9.]+[0-9]*$" value="7.85" required>
 						<div class="invalid-feedback">必填</div>
 					</div>
 				</div>
@@ -122,19 +128,19 @@
 				</div>
 
 			</div>
-		 
+
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="input_shuliang">数量</label> <input type="number"
-						class="form-control  form-control-lg" id="input_shuliang" name="shuliang"
-						pattern="^[1-9]+[0-9]*$" required>
+						class="form-control  form-control-lg" id="input_shuliang"
+						name="shuliang" pattern="^[1-9]+[0-9]*$" required>
 					<div class="invalid-feedback">必填</div>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="input_danjia">单价</label> <input type="text"
-						class="form-control  form-control-lg" id="input_danjia" name="danjia"
-						pattern="^[0-9.]+[0-9]*$" required>
+						class="form-control  form-control-lg" id="input_danjia"
+						name="danjia" pattern="^[0-9.]+[0-9]*$" required>
 					<div class="invalid-feedback">必填，只能填数字或者带小数点的数字</div>
 				</div>
 
@@ -161,13 +167,15 @@
 			<div class="form-row">
 				<div class="form-group col-md-2">
 					<label for="input_zongjia">总价</label> <input type="text"
-						class="form-control  form-control-lg" name="zongjia" id="input_zongjia">
+						class="form-control  form-control-lg" name="zongjia"
+						id="input_zongjia">
 				</div>
 				<!--tip 总价和单价自动转换为汉字大写  -->
 			</div>
 			<button type="button" class="btn btn-outline-dark mr-3">计算</button>
 			<span></span>
 			<button type="submit" class="btn btn-primary ml-3">保存</button>
+			 
 		</form>
 
 
@@ -250,7 +258,7 @@
 		}, {
 			"flag" : "kuandu",
 			"name" : "宽度"
-		},{
+		}, {
 			"flag" : "houdu",
 			"name" : "厚度"
 		} ]);
@@ -262,8 +270,16 @@
 			"flag" : "duibian",
 			"name" : "对边"
 		} ]);
+
+		var cailiaoMap = new Map();
+		cailiaoMap.set("1", "7.85")
+		cailiaoMap.set("2", "7.9")
+		cailiaoMap.set("3", "2.8")
+		cailiaoMap.set("4", "8.5")
+		cailiaoMap.set("5", "8.9")
+
 		function change_material(newVal) {
-			$("#inputDensity").val(newVal)
+			$("#input_midu").val(cailiaoMap.get(newVal))
 		}
 		function change_shape(newVal) {
 			//idshapeSize
@@ -278,6 +294,19 @@
 				$("#idshapeSize").html(sizeHtml)
 			}
 		}
+		
+		
+		/* 提醒 */
+ 
+$(document).ready(function(){
+
+	var result = eval(<%=request.getAttribute("result")%>)
+	if(!!result){
+		$('.alert').show()	
+	} 
+});
+
+ 
 	</script>
 </body>
 </html>

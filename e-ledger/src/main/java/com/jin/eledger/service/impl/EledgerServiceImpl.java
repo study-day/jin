@@ -1,48 +1,61 @@
 package com.jin.eledger.service.impl;
 
 import java.util.List;
+import java.util.UUID;
 
-import com.jin.eledger.pojo.Eledger;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.jin.eledger.dao.LedgerMapper;
+import com.jin.eledger.pojo.EledgerPo;
+import com.jin.eledger.pojo.EledgerVo;
 import com.jin.eledger.service.EledgerService;
 
+@Service
 public class EledgerServiceImpl implements EledgerService{
 
+	@Autowired
+	private LedgerMapper ledgerMapper; 
+	
 	@Override
-	public String add(Eledger eledger) {
+	public String add(EledgerVo eledger) {
 		// TODO Auto-generated method stub
-		return null;
+		EledgerPo eledgerPo = new EledgerPo();
+		String ledgerid = UUID.randomUUID().toString();
+		eledgerPo.setLedgerid(ledgerid);
+		BeanUtils.copyProperties(eledger, eledgerPo);
+		ledgerMapper.insert(eledgerPo);
+		return ledgerid;
 	}
 
 	@Override
-	public void update(Eledger eledger) {
+	public void update(EledgerVo eledger) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Eledger eledger) {
+	public void delete(EledgerVo eledger) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Eledger queryById(Eledger eledger) {
+	public EledgerVo queryById(EledgerVo eledger) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Eledger> queryList(Eledger eledger) {
+	public List<EledgerVo> queryList(EledgerVo eledger) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Eledger> queryPage(Eledger eledger) {
+	public List<EledgerVo> queryPage(EledgerVo eledger) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	//分页
-	//https://blog.csdn.net/weixin_34289454/article/details/92531109
 }
