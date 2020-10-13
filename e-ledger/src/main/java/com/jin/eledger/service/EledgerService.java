@@ -2,7 +2,7 @@ package com.jin.eledger.service;
 
 import java.util.List;
 
-
+import com.github.pagehelper.PageInfo;
 import com.jin.eledger.pojo.EledgerVo;
 
 public interface EledgerService {
@@ -12,5 +12,5 @@ public interface EledgerService {
 	public EledgerVo queryById(EledgerVo eledger);
 	public List<EledgerVo> queryList(EledgerVo eledger);
 	//分页查询
-	public List<EledgerVo> queryPage(EledgerVo eledger);
+	public PageInfo<EledgerVo> queryPage(EledgerVo eledger,int pageNum, int pageSize);
 }

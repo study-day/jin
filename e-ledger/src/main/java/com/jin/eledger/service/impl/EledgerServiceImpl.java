@@ -1,5 +1,6 @@
 package com.jin.eledger.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -7,17 +8,19 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jin.eledger.dao.LedgerMapper;
 import com.jin.eledger.pojo.EledgerPo;
 import com.jin.eledger.pojo.EledgerVo;
 import com.jin.eledger.service.EledgerService;
 
 @Service
-public class EledgerServiceImpl implements EledgerService{
+public class EledgerServiceImpl implements EledgerService {
 
 	@Autowired
-	private LedgerMapper ledgerMapper; 
-	
+	private LedgerMapper ledgerMapper;
+
 	@Override
 	public String add(EledgerVo eledger) {
 		// TODO Auto-generated method stub
@@ -32,13 +35,13 @@ public class EledgerServiceImpl implements EledgerService{
 	@Override
 	public void update(EledgerVo eledger) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(EledgerVo eledger) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -54,8 +57,20 @@ public class EledgerServiceImpl implements EledgerService{
 	}
 
 	@Override
-	public List<EledgerVo> queryPage(EledgerVo eledger) {
-		// TODO Auto-generated method stub
-		return null;
+	public PageInfo<EledgerVo> queryPage(EledgerVo eledger, int pageNum, int pageSize) {
+		// 使用PageHelper设置分页，为了安全分页，后边最好紧跟mybatis mapper方法
+		// 注意这里看起来似乎是属于内存分页，但其实PageHelper插件对mybatis执行流程进行了增强，属于物理分页
+		PageHelper.startPage(pageNum, pageSize);
+		List<EledgerPo> eledgerPos = ledgerMapper.selectByCase(eledger);
+		List<EledgerVo> eledgerVos = new ArrayList<EledgerVo>();
+		EledgerVo v = null;
+		for (EledgerPo p : eledgerPos) {
+			v = new EledgerVo();
+			BeanUtils.copyProperties(p, v);
+			eledgerVos.add(v);
+		}
+		// 返回的是一个PageInfo,包含了分页的所有信息
+		PageInfo<EledgerVo> pageInfo = new PageInfo<>(eledgerVos);
+		return pageInfo;
 	}
 }

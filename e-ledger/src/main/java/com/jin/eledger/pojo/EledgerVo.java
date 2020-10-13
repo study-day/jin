@@ -3,7 +3,7 @@ package com.jin.eledger.pojo;
 import java.util.Date;
 
 public class EledgerVo {
-	private String ledgerId;
+	private String ledgerid;
 	private String tuzhibianhao;
 	private String tuzhimingcheng;
 	private String xingzhuang;
@@ -23,7 +23,23 @@ public class EledgerVo {
 	private String xingzhuang_desc;
 	private String 	cailiao_desc;
 
+	private Date createTime_start;
+	private Date createTime_end;
 	
+	
+	
+	public Date getCreateTime_start() {
+		return createTime_start;
+	}
+	public void setCreateTime_start(Date createTime_start) {
+		this.createTime_start = createTime_start;
+	}
+	public Date getCreateTime_end() {
+		return createTime_end;
+	}
+	public void setCreateTime_end(Date createTime_end) {
+		this.createTime_end = createTime_end;
+	}
 	public String getXingzhuang_desc() {
 		return xingzhuang_desc;
 	}
@@ -36,11 +52,12 @@ public class EledgerVo {
 	public void setCailiao_desc(String cailiao_desc) {
 		this.cailiao_desc = cailiao_desc;
 	}
-	public String getLedgerId() {
-		return ledgerId;
+
+	public String getLedgerid() {
+		return ledgerid;
 	}
-	public void setLedgerId(String ledgerId) {
-		this.ledgerId = ledgerId;
+	public void setLedgerid(String ledgerid) {
+		this.ledgerid = ledgerid;
 	}
 	public String getTuzhibianhao() {
 		return tuzhibianhao;

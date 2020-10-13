@@ -44,6 +44,37 @@
     from jin_ledger
     where ledgerId = #{ledgerid,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selectByCase" resultMap="BaseResultMap" parameterType="com.jin.eledger.pojo.EledgerVo" >
+    
+    select 
+    <include refid="Base_Column_List" />
+    from jin_ledger
+    where 1=1
+     <if test="ledgerid != null" >
+        and ledgerid = #{ledgerid,jdbcType=VARCHAR}
+      </if>
+      <if test="tuzhibianhao != null" >
+        and tuzhibianhao = concat('%',#{tuzhibianhao,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="tuzhimingcheng != null" >
+        and tuzhimingcheng like concat('%',#{tuzhimingcheng,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="xingzhuang != null" >
+       and xingzhuang = #{xingzhuang,jdbcType=TINYINT}
+      </if>
+      <if test="cailiao != null" >
+        and cailiao = #{cailiao,jdbcType=TINYINT}
+      </if>
+      <if test="createTime_start != null" >
+       and createTime <![CDATA[>]]> #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      
+       <if test="createTime_end != null" >
+       and createTime <![CDATA[<]]> #{createTime_end,jdbcType=TIMESTAMP}
+      </if>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     <!--
       WARNING - @mbggenerated
