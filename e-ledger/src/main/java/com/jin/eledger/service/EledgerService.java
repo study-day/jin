@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.jin.eledger.pojo.EledgerVo;
+import com.jin.eledger.pojo.LayuiPage;
 
 public interface EledgerService {
 	public String add(EledgerVo eledger);
@@ -12,5 +13,5 @@ public interface EledgerService {
 	public EledgerVo queryById(EledgerVo eledger);
 	public List<EledgerVo> queryList(EledgerVo eledger);
 	//分页查询
-	public PageInfo<EledgerVo> queryPage(EledgerVo eledger,int pageNum, int pageSize);
+	public LayuiPage<EledgerVo> queryPage(EledgerVo eledger,int pageNum, int pageSize);
 }

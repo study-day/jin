@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.jin.eledger.pojo.EledgerVo;
 import com.jin.eledger.pojo.Guige;
+import com.jin.eledger.pojo.LayuiPage;
 import com.jin.eledger.pojo.ReponseResult;
 import com.jin.eledger.service.EledgerService;
 
@@ -45,10 +46,8 @@ public class EledgerAction {
 	
 	@ResponseBody
 	@RequestMapping("cxzd")
-	public List<EledgerVo> cxzd(EledgerVo eledger){
-		int pageNum = 0;
-		int pageSize = 10;
-		return eledgerService.queryPage(eledger, pageNum, pageSize).getList();
+	public LayuiPage<EledgerVo> cxzd(EledgerVo eledger,int page,int limit){
+		return eledgerService.queryPage(eledger, page, limit);
 	}
 	
 	

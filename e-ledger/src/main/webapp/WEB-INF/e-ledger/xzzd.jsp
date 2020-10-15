@@ -55,7 +55,7 @@
 	</nav>
 	<div class="container">
 		<!--新增表单  -->
-		<form style="margin-bottom: 30px; margin-top: 30px;"
+		<form style="margin-bottom: 20px; margin-top: 20px;"
 			class="needs-validation" novalidate action="save" method="post">
 			<!-- 提醒 -->
 			<div class="alert alert-success alert-dismissible fade show"

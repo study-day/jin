@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import com.jin.eledger.dao.LedgerMapper;
 import com.jin.eledger.pojo.EledgerPo;
 import com.jin.eledger.pojo.EledgerVo;
+import com.jin.eledger.pojo.LayuiPage;
 import com.jin.eledger.service.EledgerService;
 
 @Service
@@ -26,8 +27,9 @@ public class EledgerServiceImpl implements EledgerService {
 		// TODO Auto-generated method stub
 		EledgerPo eledgerPo = new EledgerPo();
 		String ledgerid = UUID.randomUUID().toString();
-		eledgerPo.setLedgerid(ledgerid);
 		BeanUtils.copyProperties(eledger, eledgerPo);
+		eledgerPo.setLedgerId(ledgerid);
+		System.out.println(eledgerPo);
 		ledgerMapper.insert(eledgerPo);
 		return ledgerid;
 	}
@@ -57,7 +59,7 @@ public class EledgerServiceImpl implements EledgerService {
 	}
 
 	@Override
-	public PageInfo<EledgerVo> queryPage(EledgerVo eledger, int pageNum, int pageSize) {
+	public LayuiPage<EledgerVo> queryPage(EledgerVo eledger, int pageNum, int pageSize) {
 		// 使用PageHelper设置分页，为了安全分页，后边最好紧跟mybatis mapper方法
 		// 注意这里看起来似乎是属于内存分页，但其实PageHelper插件对mybatis执行流程进行了增强，属于物理分页
 		PageHelper.startPage(pageNum, pageSize);
@@ -71,6 +73,9 @@ public class EledgerServiceImpl implements EledgerService {
 		}
 		// 返回的是一个PageInfo,包含了分页的所有信息
 		PageInfo<EledgerVo> pageInfo = new PageInfo<>(eledgerVos);
-		return pageInfo;
+		LayuiPage<EledgerVo> layuiPage = new LayuiPage<EledgerVo>();
+		layuiPage.setData(pageInfo.getList());
+		layuiPage.setCount(pageInfo.getTotal());
+		return layuiPage;
 	}
 }

@@ -6,11 +6,14 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- dhx -->
-<link rel="stylesheet" href="/style/dist/css/suite.min.css">
+
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/style/dist/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="/style/layui/css/layui.css">
+<script type="text/javascript" src="/style/dist/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/style/dist/js/popper.min.js"></script>
+<script type="text/javascript" src="/style/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/style/layui/layui.js"></script>
 
 <title>材料计算器</title>
 </head>
@@ -54,124 +57,288 @@
 			</form>
 		</div>
 	</nav>
+
+	<!-- 查询字段 -->
+
+	<fieldset style="margin: 20px 20px 0px 20px;">
+		<div class="form-row">
+			<div class="form-group  col-md-2">
+				<label for="input_tuzhimingcheng">名称</label> <input type="text"
+					class="form-control form-control-lg" id="input_tuzhimingcheng"
+					name="tuzhimingcheng" placeholder="图纸名称">
+
+			</div>
+			<div class="form-group  col-md-2">
+				<label for="input_tuzhibianhao">图号</label> <input type="text"
+					class="form-control form-control-lg" id="input_tuzhibianhao"
+					name="tuzhibianhao" placeholder="图纸编号">
+
+			</div>
+
+			<div class="form-group  col-md-2">
+				<label for="input_xingzhuang">形状选择</label> <select
+					onchange="change_shape(this.value)" id="input_xingzhuang"
+					name="xingzhuang" class="form-control  form-control-lg">
+					<option selected value="yuanbangliao">圆棒料</option>
+					<option value="yuanguanliao">圆管料</option>
+					<option value="banliao">板料</option>
+					<option value="fangguanliao">方管</option>
+					<option value="liujiaobang">六角棒</option>
+				</select>
+
+			</div>
+
+
+			<div class="col-md-2">
+				<label for="input_cailiao">材料选择</label> <select
+					onchange="change_material(this.value)" id="input_cailiao"
+					name="cailiao" class="form-control  form-control-lg">
+					<option selected value="1">碳钢：7.85g/cm3</option>
+					<option value="2">不锈钢：7.9g/cm3</option>
+					<option value="3">硬铝：2.8g/cm3</option>
+					<option value="4">黄铜：8.5g/cm3</option>
+					<option value="5">紫铜：8.9g/cm3</option>
+				</select>
+
+			</div>
+			<div class="form-group col-md-2">
+				<label for="input_shuliang">数量</label> <input type="number"
+					class="form-control  form-control-lg" id="input_shuliang"
+					name="shuliang">
+
+			</div>
+			<div class="form-group col-md-2">
+				<label for="input_danjia">单价</label> <input type="text"
+					class="form-control  form-control-lg" id="input_danjia"
+					name="danjia">
+
+			</div>
+		</div>
+
+		<!--形状大小 -->
+
+		<div class="form-row">
+
+			<div class="form-group col-md-2">
+				<label for="input_createTime_start">开始时间</label> <input type="text"
+					class="form-control form-control-lg" id="input_createTime_start"
+					name="createTime_start">
+
+			</div>
+
+			<div class="form-group col-md-2">
+				<label for="input_createTime_end">结束时间</label> <input type="text"
+					class="form-control form-control-lg" id="input_createTime_end"
+					name="createTime_end">
+			</div>
+			<div class="form-group col-md-2">
+			<label for="input_createTime_end">&nbsp</label>
+			<!--style="margin-top:26px"  -->
+				<button type="button"   class="btn btn-primary btn-lg btn-block">查询</button>
+			</div>
+		</div>
+		
+	</fieldset>
 	<!-- 表格 -->
 
-	<div style="height: 500px; width: 100%"  id="grid_container"></div>
-
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<!-- 	<script type="text/javascript" src="/style/dist/js/jquery.slim.min.js"></script> -->
-	<script type="text/javascript" src="/style/dist/js/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="/style/dist/js/popper.min.js"></script>
-	<script type="text/javascript" src="/style/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/style/dist/js/suite.min.js"></script>
-
-
+	<table id="test" lay-filter="test" style="margin: 0 20px"></table>
 
 </body>
-<script type="text/javascript">
-	// creating dhtmlxGrid
-	// creating dhtmlxGrid
 
-	// creating dhtmlxGrid
-	var grid = new dhx.Grid("grid_container", {
-		columns : [ {
-			width : 150,
-			id : "ledgerId",
-			header : [ {
-				text : "ledgerId"
-			} ]
-		}, {
-			width : 150,
-			id : "tuzhibianhao",
-			header : [ {
-				text : "图号"
-			} ]
-		}, {
-			width : 150,
-			id : "tuzhimingcheng",
-			header : [ {
-				text : "名称"
-			} ]
-		}, {
-			width : 150,
-			id : "xingzhuang",
-			header : [ {
-				text : "形状"
-			} ]
-		}, {
-			width : 150,
-			id : "guige",
-			header : [ {
-				text : "规格"
-			} ]
-		}, {
-			width : 150,
-			id : "cailiao",
-			header : [ {
-				text : "材料"
-			} ]
-		}, {
-			width : 150,
-			id : "midu",
-			header : [ {
-				text : "密度"
-			} ]
-		}, {
-			width : 150,
-			id : "shuliang",
-			header : [ {
-				text : "数量"
-			} ]
-		}, {
-			width : 150,
-			id : "danjia",
-			header : [ {
-				text : "单价"
-			} ]
-		}, {
-			width : 150,
-			id : "zhongliang",
-			header : [ {
-				text : "总量"
-			} ]
-		}, {
-			width : 150,
-			id : "tiji",
-			header : [ {
-				text : "体积"
-			} ]
-		}, {
-			width : 150,
-			id : "zongjia",
-			header : [ {
-				text : "总价"
-			} ]
-		}, {
-			width : 150,
-			id : "create_time",
-			header : [ {
-				text : "创建时间"
-			} ]
-		} ],
-		headerRowHeight : 50
-	});
-	grid.data.load("cxzd");
+<script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+    <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+    <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+    <button class="layui-btn layui-btn-sm" lay-event="reload">重载</button>
+  </div>
+</script>
+
+
+
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary  layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="del" >删除</a>
+</script>
+
+ 
  
 
-/* 	$(function() {
-		$.ajax({
-			url : "cxzd",
-			data : {},
-			type : "POST",
-			dataType : "json",
-			success : function(data2) {
-				console.log(data2.list)
-				grid.data.parse(data2.list);
+ 
+
+ 
+
+ 
+
+
+<script type="text/javascript">
+	layui.use('table', function() {
+		var table = layui.table;
+		//return;
+
+		//渲染
+		window.ins1 = table.render({
+			elem : '#test',
+			height : 650
+			//,width: 600
+			,
+			title : '用户数据表',
+			url : 'cxzd'
+			//,size: 'lg'
+			,
+			page : {
+
 			}
+
+			,
+			autoSort : false
+			//,loading: false
+			,
+			totalRow : false,//合计
+			limit : 30,
+			toolbar : '#toolbarDemo',
+			defaultToolbar : [ 'filter', 'exports', 'print', {
+				title : '帮助',
+				layEvent : 'LAYTABLE_TIPS',
+				icon : 'layui-icon-tips'
+			} ],
+			cols : [ [ {
+				type : 'checkbox',
+				fixed : 'left'
+			}, {
+				field : 'ledgerid',
+				title : 'ID',
+				width : 80,
+				hide : true
+			}, {
+				field : 'tuzhibianhao',
+				title : '图纸编号',
+				width : 120
+			}, {
+				field : 'tuzhimingcheng',
+				title : '图纸名称',
+				width : 120
+			}, {
+				field : 'xingzhuang',
+				title : '形状',
+				width : 120
+			}, {
+				field : 'guige',
+				title : '规格',
+				width : 120
+			}, {
+				field : 'cailiao',
+				title : '材料',
+				width : 120
+			}, {
+				field : 'midu',
+				title : '密度',
+				width : 120
+			}, {
+				field : 'shuliang',
+				title : '单价(元)',
+				width : 120
+			}, {
+				field : 'danjia',
+				title : '单价',
+				width : 120
+			}, {
+				field : 'tiji',
+				title : '体积(cm3)',
+				width : 120
+			}, {
+				field : 'zhongliang',
+				title : '重量(kg)',
+				width : 80,
+			}, {
+				field : 'zongjia',
+				title : '总价(元)',
+				width : 80
+			}, {
+				field : 'create_time',
+				title : '创建时间',
+				width : 120
+			}, {
+				fixed : 'right',
+				title : '操作',
+				toolbar : '#barDemo',
+				width : 150
+			} ] ]
+		/*
+		,response: {
+		  statusName: 'status'
+		  ,statusCode: 200
+		}
+		,parseData: function(res){
+		  return {
+		    "status": res.status
+		    ,"msg": res.message
+		    ,"count": res.total
+		    ,"data": res.data.list
+		  };
+		}
+		 */
 		});
-	}) */
+
+		//工具栏事件
+		table.on('toolbar(test)', function(obj) {
+			var checkStatus = table.checkStatus(obj.config.id);
+			switch (obj.event) {
+			case 'add':
+				layer.msg('添加');
+				break;
+			case 'update':
+				layer.msg('编辑');
+				break;
+			case 'delete':
+				layer.msg('删除');
+				break;
+			case 'getCheckData':
+				var data = checkStatus.data;
+				layer.alert(JSON.stringify(data));
+				break;
+			case 'getCheckLength':
+				var data = checkStatus.data;
+				layer.msg('选中了：' + data.length + ' 个');
+				break;
+			case 'isAll':
+				layer.msg(checkStatus.isAll ? '全选' : '未全选')
+				break;
+			case 'LAYTABLE_TIPS':
+				layer.alert('Table for layui-v' + layui.v);
+				break;
+			case 'reload':
+				table.reload('test', {
+					page : {
+						curr : 5
+					}
+				//,height: 300
+				//,url: 'x'
+				}, 'data');
+				break;
+			}
+			;
+		});
+
+		table.on('row(test)', function(obj) {
+			console.log(obj);
+			//layer.closeAll('tips');
+		});
+
+	});
+
+	/* 开始时间，结束时间 */
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#input_createTime_start' //指定元素
+		});
+		laydate.render({
+			elem : '#input_createTime_end' //指定元素
+		});
+	});
 </script>
 </html>
 
