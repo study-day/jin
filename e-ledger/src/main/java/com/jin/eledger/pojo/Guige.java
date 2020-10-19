@@ -4,7 +4,7 @@ package com.jin.eledger.pojo;
  *  规格
  *
  */
-public class Guige {
+public class Guige  {
 	private String  changdu;
 	private String  kuandu;
 	private String  gaodu;

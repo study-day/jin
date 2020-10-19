@@ -9,9 +9,9 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="/style/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/style/dist/css/toastr.min.css">
 
-
-<title>材料计算器</title>
+<title>电子账单</title>
 </head>
 <body>
 
@@ -19,62 +19,54 @@
 	<!-- Content here -->
 	<!-- topnav -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">材料计算器</a>
+		<a class="navbar-brand" href="xzzd">电子账单</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="#">账单
+				<li class="nav-item active"><a class="nav-link" href="xzzd">记账
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">记账</a></li>
-				<!-- 		<!-- <li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Dropdown </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Action</a> <a
-								class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div></li>
-					<li class="nav-item"><a class="nav-link disabled" href="#"
-						tabindex="-1" aria-disabled="true">Disabled</a></li> -->
+				<li class="nav-item"><a class="nav-link" href="zdlb">账单</a></li>
+				<li class="nav-item"><a class="nav-link" href="cljsq">材料计算器</a></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				<input class="form-control mr-sm-2" type="search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
 			</form>
 		</div>
 	</nav>
+
 	<div class="container">
 		<!--新增表单  -->
 		<form style="margin-bottom: 20px; margin-top: 20px;"
-			class="needs-validation" novalidate action="save" method="post">
+			class="needs-validation" novalidate action="xzzd" method="post" id="xzzdForm">
 			<!-- 提醒 -->
-			<div class="alert alert-success alert-dismissible fade show"
-				style="display: none">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<strong>成功!</strong> 指定操作成功提示信息。
-			</div>
+			<%--<div class="alert alert-success alert-dismissible fade show"--%>
+				<%--style="display: none">--%>
+				<%--<button type="button" class="close" data-dismiss="alert">&times;</button>--%>
+				<%--<strong>成功!</strong> 指定操作成功提示信息。--%>
+			<%--</div>--%>
 
 			<div class="form-row">
 				<div class="form-group col-md-6">
+					<input type="text"
+						   class="form-control form-control-lg" id="input_ledgerId"
+						   name="ledgerId" hidden>
+
 					<label for="input_tuzhimingcheng">名称</label> <input type="text"
 						class="form-control form-control-lg" id="input_tuzhimingcheng"
-						name="tuzhimingcheng" placeholder="图纸名称" required>
+						name="tuzhimingcheng"  required>
 					<div class="invalid-feedback">必填</div>
 				</div>
 				<div class="form-group col-md-6">
 					<label for="input_tuzhibianhao">图号</label> <input type="text"
 						class="form-control form-control-lg" id="input_tuzhibianhao"
-						name="tuzhibianhao" placeholder="图纸编号" required>
+						name="tuzhibianhao" required>
 					<div class="invalid-feedback">必填</div>
 				</div>
 			</div>
@@ -173,9 +165,16 @@
 				</div>
 				<!--tip 总价和单价自动转换为汉字大写  -->
 			</div>
-			<button type="button" class="btn btn-outline-dark mr-3">计算</button>
+
+			<div class="form-row">
+				<div class="form-group col-md-12 " style="text-align:center">
+				<button type="button" class="btn btn-outline-dark mr-3"  >计算</button>
+					<button type="submit" class="btn btn-primary ml-3" >保存</button>
+				</div>
+			</div>
+
 			<span></span>
-			<button type="submit" class="btn btn-primary ml-3">保存</button>
+
 
 		</form>
 
@@ -184,9 +183,12 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script type="text/javascript" src="/style/dist/js/jquery.slim.min.js"></script>
+	<%--<script type="text/javascript" src="/style/dist/js/jquery.slim.min.js"></script>--%>
+	<script type="text/javascript" src="/style/dist/js/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="/style/dist/js/popper.min.js"></script>
 	<script type="text/javascript" src="/style/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/style/dist/js/toastr.min.js"></script>
+	<script type="text/javascript" src="/style/dist/js/eledgerdata.js"></script>
 
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -214,70 +216,6 @@
 					}, false);
 		})();
 
-		var shapeMap = new Map();
-		shapeMap.set("fangguanliao", [ {
-			"flag" : "changdu",
-			"name" : "长度"
-		}, {
-			"flag" : "kuandu",
-			"name" : "宽度"
-		}, {
-			"flag" : "gaodu",
-			"name" : "高度"
-		}, {
-			"flag" : "neikuan",
-			"name" : "内宽"
-		}, {
-			"flag" : "neigao",
-			"name" : "内高"
-		} ]);
-		shapeMap.set("yuanbangliao", [ {
-			"flag" : "changdu",
-			"name" : "长度"
-		}, {
-			"flag" : "waijing",
-			"name" : "外径"
-		} ]);
-		//圆管料
-		shapeMap.set("yuanguanliao", [ {
-			"flag" : "changdu",
-			"name" : "长度"
-		}, {
-			"flag" : "waijing",
-			"name" : "外径"
-		}, {
-			"flag" : "neijing",
-			"name" : "内径"
-		}, {
-			"flag" : "bihou",
-			"name" : "壁厚"
-		} ]);
-		//板料
-		shapeMap.set("banliao", [ {
-			"flag" : "changdu",
-			"name" : "长度"
-		}, {
-			"flag" : "kuandu",
-			"name" : "宽度"
-		}, {
-			"flag" : "houdu",
-			"name" : "厚度"
-		} ]);
-		//六角棒
-		shapeMap.set("liujiaobang", [ {
-			"flag" : "changdu",
-			"name" : "长度"
-		}, {
-			"flag" : "duibian",
-			"name" : "对边"
-		} ]);
-
-		var cailiaoMap = new Map();
-		cailiaoMap.set("1", "7.85")
-		cailiaoMap.set("2", "7.9")
-		cailiaoMap.set("3", "2.8")
-		cailiaoMap.set("4", "8.5")
-		cailiaoMap.set("5", "8.9")
 
 		function change_material(newVal) {
 			$("#input_midu").val(cailiaoMap.get(newVal))
@@ -297,14 +235,39 @@
 		}
 
 		/* 提醒 */
-
 		$(document).ready(function() {
-
+		
 			var result = eval(
-	<%=request.getAttribute("result")%>
+	       <%=request.getAttribute("result")%>
 		)
 			if (!!result) {
-				$('.alert').show()
+				toastr.success(result.msg);
+			}
+			
+			
+			/* 修改账单 */
+			var guigeData = eval(<%=request.getAttribute("guige01")%>)
+			var eledgerVo = eval(<%=request.getAttribute("eledger01")%>)
+			//xzzdForm
+			
+			if(!!eledgerVo){
+				var xzzdFormSet = $("form input");
+				for(var i =0; i < xzzdFormSet.length;i++){
+					 for(let key  in eledgerVo){
+
+						 if(xzzdFormSet[i].getAttribute("id")==("input_"+key)){
+							 $("#input_"+key).val(eledgerVo[key])	 
+						 }
+						 
+					 }
+					 for(let key2  in guigeData){
+						 if(xzzdFormSet[i].getAttribute("id")==("input_"+key2)){
+							 $("#input_"+key2).val(guigeData[key2])
+						 }
+						 
+					 }
+				}
+
 			}
 		});
 	</script>

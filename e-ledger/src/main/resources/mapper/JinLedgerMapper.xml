@@ -15,6 +15,7 @@
     <result column="cailiao" property="cailiao" jdbcType="TINYINT" />
     <result column="midu" property="midu" jdbcType="VARCHAR" />
     <result column="shuliang" property="shuliang" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="danjia" property="danjia" jdbcType="VARCHAR" />
     <result column="tiji" property="tiji" jdbcType="VARCHAR" />
     <result column="zhongliang" property="zhongliang" jdbcType="VARCHAR" />
@@ -31,7 +32,7 @@
       This element was generated on Sun Oct 11 00:24:59 GMT+08:00 2020.
     -->
     ledgerId, tuzhibianhao, tuzhimingcheng, xingzhuang, guige, cailiao, midu, shuliang, 
-    danjia, tiji, zhongliang, zongjia, IP, create_time, create_uesr, update_time
+    danjia, tiji, zhongliang, zongjia, IP, create_time, create_uesr, update_time,status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     <!--
@@ -42,7 +43,7 @@
     select 
     <include refid="Base_Column_List" />
     from jin_ledger
-    where ledgerId = #{ledgerId,jdbcType=VARCHAR}
+    where ledgerId = #{ledgerId,jdbcType=INTEGER}
   </select>
   
   <select id="selectByCase" resultMap="BaseResultMap" parameterType="com.jin.eledger.pojo.EledgerVo" >
@@ -51,27 +52,38 @@
     <include refid="Base_Column_List" />
     from jin_ledger
     where 1=1
-     <if test="ledgerId != null" >
+      <if test="status != null"  >
+          and status = #{status,jdbcType=TINYINT}
+      </if>
+     <if test="ledgerId != null and ledgerId!='' " >
         and ledgerId = #{ledgerId,jdbcType=VARCHAR}
       </if>
-      <if test="tuzhibianhao != null" >
-        and tuzhibianhao = concat('%',#{tuzhibianhao,jdbcType=VARCHAR},'%')
+      <if test="tuzhibianhao != null and  tuzhibianhao!='' " >
+        and tuzhibianhao like concat('%',#{tuzhibianhao,jdbcType=VARCHAR},'%')
       </if>
-      <if test="tuzhimingcheng != null" >
+      <if test="tuzhimingcheng != null and tuzhimingcheng!=''" >
         and tuzhimingcheng like concat('%',#{tuzhimingcheng,jdbcType=VARCHAR},'%')
       </if>
-      <if test="xingzhuang != null" >
-       and xingzhuang = #{xingzhuang,jdbcType=TINYINT}
+      <if test="xingzhuang != null and xingzhuang!=''" >
+       and xingzhuang = #{xingzhuang,jdbcType=VARCHAR}
       </if>
-      <if test="cailiao != null" >
+      <if test="cailiao != null and cailiao!=''" >
         and cailiao = #{cailiao,jdbcType=TINYINT}
       </if>
+
+    <if test="shuliang != null and shuliang!=''" >
+      and shuliang = #{shuliang,jdbcType=INTEGER}
+    </if>
+    <if test="danjia != null and danjia!=''" >
+      and danjia = #{danjia,jdbcType=VARCHAR}
+    </if>
+
       <if test="createTime_start != null" >
-       and createTime <![CDATA[>]]> #{createTime,jdbcType=TIMESTAMP}
+       and create_time <![CDATA[>=]]> #{createTime_start,jdbcType=TIMESTAMP}
       </if>
       
        <if test="createTime_end != null" >
-       and createTime <![CDATA[<]]> #{createTime_end,jdbcType=TIMESTAMP}
+       and create_time <![CDATA[<]]> #{createTime_end,jdbcType=TIMESTAMP}
       </if>
   </select>
   
@@ -95,13 +107,13 @@
       midu, shuliang, danjia, 
       tiji, zhongliang, zongjia, 
       IP, create_time, create_uesr, 
-      update_time)
+      update_time,status)
     values (#{ledgerId,jdbcType=VARCHAR}, #{tuzhibianhao,jdbcType=VARCHAR}, #{tuzhimingcheng,jdbcType=VARCHAR}, 
-      #{xingzhuang,jdbcType=TINYINT}, #{guige,jdbcType=VARCHAR}, #{cailiao,jdbcType=TINYINT}, 
+      #{xingzhuang,jdbcType=VARCHAR}, #{guige,jdbcType=VARCHAR}, #{cailiao,jdbcType=TINYINT},
       #{midu,jdbcType=VARCHAR}, #{shuliang,jdbcType=INTEGER}, #{danjia,jdbcType=VARCHAR}, 
       #{tiji,jdbcType=VARCHAR}, #{zhongliang,jdbcType=VARCHAR}, #{zongjia,jdbcType=VARCHAR}, 
       #{ip,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUesr,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{updateTime,jdbcType=TIMESTAMP},#{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jin.eledger.pojo.EledgerPo" >
     <!--
@@ -159,6 +171,10 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+
+      <if test="status != null" >
+        status
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="ledgerId != null" >
@@ -171,7 +187,7 @@
         #{tuzhimingcheng,jdbcType=VARCHAR},
       </if>
       <if test="xingzhuang != null" >
-        #{xingzhuang,jdbcType=TINYINT},
+        #{xingzhuang,jdbcType=VARCHAR},
       </if>
       <if test="guige != null" >
         #{guige,jdbcType=VARCHAR},
@@ -209,6 +225,9 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status!= null" >
+        #{status,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jin.eledger.pojo.EledgerPo" >
@@ -226,7 +245,7 @@
         tuzhimingcheng = #{tuzhimingcheng,jdbcType=VARCHAR},
       </if>
       <if test="xingzhuang != null" >
-        xingzhuang = #{xingzhuang,jdbcType=TINYINT},
+        xingzhuang = #{xingzhuang,jdbcType=VARCHAR},
       </if>
       <if test="guige != null" >
         guige = #{guige,jdbcType=VARCHAR},
@@ -264,6 +283,9 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
     </set>
     where ledgerId = #{ledgerId,jdbcType=VARCHAR}
   </update>
@@ -276,7 +298,7 @@
     update jin_ledger
     set tuzhibianhao = #{tuzhibianhao,jdbcType=VARCHAR},
       tuzhimingcheng = #{tuzhimingcheng,jdbcType=VARCHAR},
-      xingzhuang = #{xingzhuang,jdbcType=TINYINT},
+      xingzhuang = #{xingzhuang,jdbcType=VARCHAR},
       guige = #{guige,jdbcType=VARCHAR},
       cailiao = #{cailiao,jdbcType=TINYINT},
       midu = #{midu,jdbcType=VARCHAR},
@@ -288,6 +310,7 @@
       IP = #{ip,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_uesr = #{createUesr,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where ledgerId = #{ledgerId,jdbcType=VARCHAR}
   </update>
