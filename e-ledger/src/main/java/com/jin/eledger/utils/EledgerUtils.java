@@ -121,6 +121,9 @@ public class EledgerUtils {
             } if("duibian".equals(obj.getKey())&&obj.getValue()!=null){
                 resultData = resultData+obj.getValue()+"(对边),";
                 continue;
+            }if("houdu".equals(obj.getKey())&&obj.getValue()!=null){
+                resultData = resultData+obj.getValue()+"(厚度),";
+                continue;
             }
 
         }

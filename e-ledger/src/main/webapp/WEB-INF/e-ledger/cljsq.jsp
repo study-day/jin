@@ -28,19 +28,19 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item "><a class="nav-link" href="xzzd">记账
-
+			<li class="nav-item active"><a class="nav-link" href="xzzd">记账
+				<span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="zdlb">账单</a></li>
-			<li class="nav-item active"><a class="nav-link " href="cljsq">材料计算器 <span class="sr-only">(current)</span></a></li>
+			<li class="nav-item"><a class="nav-link" href="cljsq">材料计算器</a></li>
 		</ul>
 		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search"
-			 aria-label="Search">
+			<input class="form-control mr-sm-2" type="search" aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
 		</form>
 	</div>
 </nav>
+
 <div class="container">
 	<!--新增表单  -->
 	<form style="margin-bottom: 20px; margin-top: 20px;"
@@ -54,6 +54,10 @@
 
 		<div class="form-row">
 			<div class="form-group col-md-6">
+				<input type="text"
+					   class="form-control form-control-lg" id="input_ledgerId"
+					   name="ledgerId" hidden>
+
 				<label for="input_tuzhimingcheng">名称</label> <input type="text"
 																	class="form-control form-control-lg" id="input_tuzhimingcheng"
 																	name="tuzhimingcheng"  required>
@@ -62,7 +66,7 @@
 			<div class="form-group col-md-6">
 				<label for="input_tuzhibianhao">图号</label> <input type="text"
 																  class="form-control form-control-lg" id="input_tuzhibianhao"
-																  name="tuzhibianhao"  required>
+																  name="tuzhibianhao" required>
 				<div class="invalid-feedback">必填</div>
 			</div>
 		</div>
@@ -164,7 +168,7 @@
 
 		<div class="form-row">
 			<div class="form-group col-md-12 " style="text-align:center">
-				<button type="button" class="btn btn-outline-dark mr-3"  >计算</button>
+				<button type="button" class="btn btn-outline-dark mr-3" onclick="jisuan_hs()" >计算</button>
 				<button type="submit" class="btn btn-primary ml-3" >保存</button>
 			</div>
 		</div>
@@ -187,6 +191,62 @@
 <script type="text/javascript" src="/style/dist/js/eledgerdata.js"></script>
 
 <script>
+	/**
+	 * 	<option selected value="yuanbangliao">圆棒料</option>
+	 <option value="yuanguanliao">圆管料</option>
+	 <option value="banliao">板料</option>
+	 <option value="fangguanliao">方管</option>
+	 <option value="liujiaobang">六角棒</option>
+	 */
+	function jisuan_hs() {
+		var tiji= "";
+		var zhongliang= "";
+		var zongjia = "";
+		var xingzhuang = $("#input_xingzhuang").val();
+		var changdu = $("#input_changdu").val();
+		var waijing = $("#input_waijing").val();
+		var midu = $("#input_midu").val();
+		var danjia = $("#input_danjia").val();
+		var shuliang = $("#input_shuliang").val();
+		if(xingzhuang=="yuanbangliao"){
+			if(changdu.trim()==""||!Number.isInteger(changdu/1)){
+				toastr.warning("长度必填，且只能输入整数，请重新输入！");
+				return;
+			}
+			if(!waijing || waijing.trim()==""||!Number.isInteger(waijing/1)){
+				toastr.warning("外径必填，且只能输入整数，请重新输入！");
+				return;
+			}
+			tiji = (changdu/10)*3.14*(waijing/10/2)*(waijing/10/2)*shuliang
+			if(!!midu && midu.trim()!=""){
+				try {
+					zhongliang = tiji*midu/1000;
+					console.log(zhongliang)
+					console.log(tiji*midu)
+				}
+				catch(err){
+					toastr.warning("密度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+
+			}
+			if(!danjia || danjia.trim()==""){
+				toastr.warning("单价必填，请重新输入！");
+				return;
+			}
+			if(!shuliang || shuliang.trim()==""||!Number.isInteger(shuliang/1)){
+				toastr.warning("数量必填，且只能输入整数，请重新输入！");
+				return;
+			}
+			zongjia = keepTwoDecimalFull(danjia*zhongliang);
+
+		}
+
+		$("#input_tiji").val(keepTwoDecimalFull(tiji));
+		$("#input_zhongliang").val(keepTwoDecimalFull(zhongliang));
+		$("#input_zongjia").val(zongjia);
+	}
+	
 	// Example starter JavaScript for disabling form submissions if there are invalid fields
 	(function() {
 		'use strict';

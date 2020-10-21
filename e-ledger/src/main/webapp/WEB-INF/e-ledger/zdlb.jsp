@@ -238,16 +238,16 @@
 			}, {
 				field : 'xingzhuang',
 				title : '形状',
-				width : 120,
+				width : 110,
 				templet:'#xingzhuangTpl'
 			}, {
 				field : 'guige_desc',
 				title : '规格',
-				width : 260
+				width : 320
 			},{
 				field : 'guige',
 				title : '规格',
-				width : 260,
+				width : 300,
 				hide : true
 			}, {
 				field : 'cailiao',
@@ -257,23 +257,23 @@
 			}, {
 				field : 'midu',
 				title : '密度',
-				width : 110
+				width : 90
 			}, {
 				field : 'shuliang',
 				title : '数量',
-				width : 100
+				width : 90
 			}, {
 				field : 'danjia',
 				title : '单价(元)',
-				width : 110
+				width : 100
 			}, {
 				field : 'tiji',
 				title : '体积(cm3)',
-				width : 110
+				width : 100
 			}, {
 				field : 'zhongliang',
 				title : '重量(kg)',
-				width : 120,
+				width : 100,
 			}, {
 				field : 'zongjia',
 				title : '总价(元)',

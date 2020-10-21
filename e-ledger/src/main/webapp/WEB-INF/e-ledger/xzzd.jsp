@@ -248,17 +248,17 @@
 			/* 修改账单 */
 			var guigeData = eval(<%=request.getAttribute("guige01")%>)
 			var eledgerVo = eval(<%=request.getAttribute("eledger01")%>)
-			//xzzdForm
-			
+
 			if(!!eledgerVo){
+				$("#input_xingzhuang").val(eledgerVo.xingzhuang);
+				$("#input_cailiao").val(eledgerVo.cailiao);
+				change_shape(eledgerVo.xingzhuang)
 				var xzzdFormSet = $("form input");
 				for(var i =0; i < xzzdFormSet.length;i++){
 					 for(let key  in eledgerVo){
-
 						 if(xzzdFormSet[i].getAttribute("id")==("input_"+key)){
-							 $("#input_"+key).val(eledgerVo[key])	 
+							 $("#input_"+key).val(eledgerVo[key])
 						 }
-						 
 					 }
 					 for(let key2  in guigeData){
 						 if(xzzdFormSet[i].getAttribute("id")==("input_"+key2)){
