@@ -168,7 +168,7 @@
 
 			<div class="form-row">
 				<div class="form-group col-md-12 " style="text-align:center">
-				<button type="button" class="btn btn-outline-dark mr-3"  >计算</button>
+
 					<button type="submit" class="btn btn-primary ml-3" >保存</button>
 				</div>
 			</div>

@@ -398,6 +398,7 @@
 					$.post("sczd?eledgerId="+obj.data.ledgerId,function(data){
 						if(data.code=="0"){
 							toastr.success(data.msg);
+							active['reload'].call(this)
 						}
 					});
 					obj.del();
