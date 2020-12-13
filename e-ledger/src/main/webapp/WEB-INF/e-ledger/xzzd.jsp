@@ -28,10 +28,11 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="zdlb">账单</a></li>
 				<li class="nav-item active"><a class="nav-link" href="xzzd">记账
 						<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="zdlb">账单</a></li>
+
 				<li class="nav-item"><a class="nav-link" href="cljsq">材料计算器</a></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
@@ -142,23 +143,23 @@
 			<div class="form-row">
 
 				<div class="form-group col-md-6">
-					<label for="input_zhongliang">重量（公斤）</label> <input type="number"
+					<label for="input_zhongliang">重量（公斤）</label> <input type="text"
 						class="form-control form-control-lg" id="input_zhongliang"
-						name="zhongliang" pattern="^[0-9.]+[0-9]*$" required>
-					<div class="invalid-feedback">必填</div>
+						name="zhongliang" pattern="^[0-9.]+[0-9]*$" >
+					<div class="invalid-feedback">必填，只能填数字或者带小数点的数字</div>
 				</div>
 
 				<div class="form-group col-md-6">
-					<label for="input_tiji">体积（cm3）</label> <input type="number"
+					<label for="input_tiji">体积（cm3）</label> <input type="text"
 						class="form-control form-control-lg" id="input_tiji" name="tiji"
-						pattern="^[0-9.]+[0-9]*$" required>
-					<div class="invalid-feedback">必填</div>
+						pattern="^[0-9.]+[0-9]*$" >
+					<div class="invalid-feedback">必填，只能填数字或者带小数点的数字</div>
 				</div>
 			</div>
 
 
 			<div class="form-row">
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-6">
 					<label for="input_zongjia">总价</label> <input type="text"
 						class="form-control  form-control-lg" name="zongjia"
 						id="input_zongjia">
@@ -168,7 +169,7 @@
 
 			<div class="form-row">
 				<div class="form-group col-md-12 " style="text-align:center">
-
+					<button type="button" class="btn btn-outline-dark mr-3" onclick="jisuan_hs()" >计算</button>
 					<button type="submit" class="btn btn-primary ml-3" >保存</button>
 				</div>
 			</div>

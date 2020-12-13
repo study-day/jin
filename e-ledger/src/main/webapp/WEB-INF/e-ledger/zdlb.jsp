@@ -50,10 +50,12 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
+
+				<li class="nav-item active"><a class="nav-link" href="zdlb">账单 <span class="sr-only">(current)</span></a></li>
 				<li class="nav-item "><a class="nav-link" href="xzzd">记账
 
 				</a></li>
-				<li class="nav-item active"><a class="nav-link" href="zdlb">账单 <span class="sr-only">(current)</span></a></li>
+
 				<li class="nav-item"><a class="nav-link" href="cljsq">材料计算器</a></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">

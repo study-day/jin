@@ -28,11 +28,13 @@
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="xzzd">记账
-				<span class="sr-only">(current)</span>
+
+            <li class="nav-item"><a class="nav-link" href="zdlb">账单</a></li>
+			<li class="nav-item"><a class="nav-link" href="xzzd">记账
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="zdlb">账单</a></li>
-			<li class="nav-item"><a class="nav-link" href="cljsq">材料计算器</a></li>
+			<li class="nav-item active"><a class="nav-link" href="cljsq">材料计算器
+                <span class="sr-only">(current)</span>
+            </a></li>
 		</ul>
 		<form class="form-inline my-2 my-lg-0">
 			<input class="form-control mr-sm-2" type="search" aria-label="Search">
@@ -142,23 +144,25 @@
 		<div class="form-row">
 
 			<div class="form-group col-md-6">
-				<label for="input_zhongliang">重量（公斤）</label> <input type="number"
+				<label for="input_zhongliang">重量（公斤）</label> <input type="text"
 																	class="form-control form-control-lg" id="input_zhongliang"
-																	name="zhongliang" pattern="^[0-9.]+[0-9]*$" required>
+																	name="zhongliang" pattern="^[0-9.]+[0-9]*$"  >
+                <div class="invalid-feedback">必填，只能填数字或者带小数点的数字</div>
 				<div class="invalid-feedback">必填</div>
 			</div>
 
 			<div class="form-group col-md-6">
-				<label for="input_tiji">体积（cm3）</label> <input type="number"
+				<label for="input_tiji">体积（cm3）</label> <input type="text"
 															   class="form-control form-control-lg" id="input_tiji" name="tiji"
-															   pattern="^[0-9.]+[0-9]*$" required>
+															   pattern="^[0-9.]+[0-9]*$"  >
+                <div class="invalid-feedback">必填，只能填数字或者带小数点的数字</div>
 				<div class="invalid-feedback">必填</div>
 			</div>
 		</div>
 
 
 		<div class="form-row">
-			<div class="form-group col-md-2">
+			<div class="form-group col-md-6">
 				<label for="input_zongjia">总价</label> <input type="text"
 															 class="form-control  form-control-lg" name="zongjia"
 															 id="input_zongjia">
@@ -198,54 +202,7 @@
 	 <option value="fangguanliao">方管</option>
 	 <option value="liujiaobang">六角棒</option>
 	 */
-	function jisuan_hs() {
-		var tiji= "";
-		var zhongliang= "";
-		var zongjia = "";
-		var xingzhuang = $("#input_xingzhuang").val();
-		var changdu = $("#input_changdu").val();
-		var waijing = $("#input_waijing").val();
-		var midu = $("#input_midu").val();
-		var danjia = $("#input_danjia").val();
-		var shuliang = $("#input_shuliang").val();
-		if(xingzhuang=="yuanbangliao"){
-			if(changdu.trim()==""||!Number.isInteger(changdu/1)){
-				toastr.warning("长度必填，且只能输入整数，请重新输入！");
-				return;
-			}
-			if(!waijing || waijing.trim()==""||!Number.isInteger(waijing/1)){
-				toastr.warning("外径必填，且只能输入整数，请重新输入！");
-				return;
-			}
-			tiji = (changdu/10)*3.14*(waijing/10/2)*(waijing/10/2)*shuliang
-			if(!!midu && midu.trim()!=""){
-				try {
-					zhongliang = tiji*midu/1000;
-					console.log(zhongliang)
-					console.log(tiji*midu)
-				}
-				catch(err){
-					toastr.warning("密度必填，且只能输入整数，请重新输入！");
-					return;
-				}
 
-			}
-			if(!danjia || danjia.trim()==""){
-				toastr.warning("单价必填，请重新输入！");
-				return;
-			}
-			if(!shuliang || shuliang.trim()==""||!Number.isInteger(shuliang/1)){
-				toastr.warning("数量必填，且只能输入整数，请重新输入！");
-				return;
-			}
-			zongjia = keepTwoDecimalFull(danjia*zhongliang);
-
-		}
-
-		$("#input_tiji").val(keepTwoDecimalFull(tiji));
-		$("#input_zhongliang").val(keepTwoDecimalFull(zhongliang));
-		$("#input_zongjia").val(zongjia);
-	}
 	
 	// Example starter JavaScript for disabling form submissions if there are invalid fields
 	(function() {

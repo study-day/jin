@@ -136,3 +136,232 @@
 			}
 			return s_x;
 		}
+
+
+
+
+		function jisuan_hs() {
+			var tiji= "";
+			var zhongliang= "";
+			var zongjia = "";
+			var xingzhuang = $("#input_xingzhuang").val();
+			var changdu = $("#input_changdu").val();
+			var waijing = $("#input_waijing").val();
+			var midu = $("#input_midu").val();
+			var danjia = $("#input_danjia").val();
+			var shuliang = $("#input_shuliang").val();
+
+			var neijing = $("#input_neijing").val();
+
+			var kuandu = $("#input_kuandu").val();
+			var houdu = $("#input_houdu").val();
+			var gaodu = $("#input_gaodu").val();
+			var neikuan = $("#input_neikuan").val();
+			var neigao = $("#input_neigao").val();
+			var duibian = $("#input_duibian").val();
+			if(xingzhuang=="yuanbangliao"){
+				if(changdu.trim()==""||!Number.isInteger(changdu/1)){
+					toastr.warning("长度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				if(!waijing || waijing.trim()==""||!Number.isInteger(waijing/1)){
+					toastr.warning("外径必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				tiji = (changdu/10)*3.14*(waijing/10/2)*(waijing/10/2)*shuliang
+				if(!!midu && midu.trim()!=""){
+					try {
+						zhongliang = tiji*midu/1000;
+						console.log(zhongliang)
+						console.log(tiji*midu)
+					}
+					catch(err){
+						toastr.warning("密度必填！");
+						return;
+					}
+
+				}
+				if(!danjia || danjia.trim()==""){
+					toastr.warning("单价必填，请重新输入！");
+					return;
+				}
+				if(!shuliang || shuliang.trim()==""||!Number.isInteger(shuliang/1)){
+					toastr.warning("数量必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				//zongjia = keepTwoDecimalFull(danjia*zhongliang);
+				zongjia = danjia*zhongliang;
+
+			}
+
+			//圆管料
+			if(xingzhuang=="yuanguanliao"){
+				if(changdu.trim()==""||!Number.isInteger(changdu/1)){
+					toastr.warning("长度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				if(!waijing || waijing.trim()==""||!Number.isInteger(waijing/1)){
+					toastr.warning("外径必填，且只能输入整数，请重新输入！");
+					return;
+				}
+
+				if(!neijing || neijing.trim()==""||!Number.isInteger(neijing/1)){
+					toastr.warning("内径必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				//tiji = (waijing/10)*3.14*(waijing/10/2)*(waijing/10/2)*shuliang
+				tiji = (((waijing/10/2)*(waijing/10/2)*3.14*changdu/10)-((neijing/10/2)*(neijing/10/2)*3.14*changdu/10))*shuliang
+				if(!!midu && midu.trim()!=""){
+					try {
+						zhongliang = tiji*midu/1000;
+						console.log("midu : "+midu)
+						console.log(zhongliang)
+						console.log(tiji*midu)
+					}
+					catch(err){
+						toastr.warning("密度必填！");
+						return;
+					}
+
+				}
+				if(!danjia || danjia.trim()==""){
+					toastr.warning("单价必填，请重新输入！");
+					return;
+				}
+				if(!shuliang || shuliang.trim()==""||!Number.isInteger(shuliang/1)){
+					toastr.warning("数量必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				zongjia = danjia*zhongliang;
+			}
+
+			//板料
+			if(xingzhuang=="banliao"){
+				if(changdu.trim()==""||!Number.isInteger(changdu/1)){
+					toastr.warning("长度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				if(!kuandu || kuandu.trim()==""||!Number.isInteger(kuandu/1)){
+					toastr.warning("宽度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+
+				if(!houdu || houdu.trim()==""||!Number.isInteger(houdu/1)){
+					toastr.warning("厚度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				tiji = ((changdu/10)*(kuandu/10)*(houdu/10))*shuliang
+				if(!!midu && midu.trim()!=""){
+					try {
+						zhongliang = tiji*midu/1000;
+						console.log("midu : "+midu)
+						console.log(zhongliang)
+						console.log(tiji*midu)
+					}
+					catch(err){
+						toastr.warning("密度必填！");
+						return;
+					}
+
+				}
+				if(!danjia || danjia.trim()==""){
+					toastr.warning("单价必填，请重新输入！");
+					return;
+				}
+				if(!shuliang || shuliang.trim()==""||!Number.isInteger(shuliang/1)){
+					toastr.warning("数量必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				zongjia = danjia*zhongliang;
+			}
+
+			//方管
+			if(xingzhuang=="fangguanliao"){
+				if(changdu.trim()==""||!Number.isInteger(changdu/1)){
+					toastr.warning("长度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				if(!kuandu || kuandu.trim()==""||!Number.isInteger(kuandu/1)){
+					toastr.warning("宽度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+
+				if(!gaodu || gaodu.trim()==""||!Number.isInteger(gaodu/1)){
+					toastr.warning("厚度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+
+				if(!neigao || neigao.trim()==""||!Number.isInteger(neigao/1)){
+					toastr.warning("内高必填，且只能输入整数，请重新输入！");
+					return;
+				}
+
+				if(!neikuan || neikuan.trim()==""||!Number.isInteger(neikuan/1)){
+					toastr.warning("内宽必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				tiji = (((changdu/10)*(kuandu/10)*(gaodu/10))-((changdu/10)*(neikuan/10)*(neigao/10)))*shuliang
+				if(!!midu && midu.trim()!=""){
+					try {
+						zhongliang = tiji*midu/1000;
+						console.log("midu : "+midu)
+						console.log(zhongliang)
+						console.log(tiji*midu)
+					}
+					catch(err){
+						toastr.warning("密度必填！");
+						return;
+					}
+
+				}
+				if(!danjia || danjia.trim()==""){
+					toastr.warning("单价必填，请重新输入！");
+					return;
+				}
+				if(!shuliang || shuliang.trim()==""||!Number.isInteger(shuliang/1)){
+					toastr.warning("数量必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				zongjia = danjia*zhongliang;
+			}
+
+			//六角棒
+			if(xingzhuang=="liujiaobang"){
+				if(changdu.trim()==""||!Number.isInteger(changdu/1)){
+					toastr.warning("长度必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				if(!duibian || duibian.trim()==""||!Number.isInteger(duibian/1)){
+					toastr.warning("对边必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				//2分之根号3约等于0.866
+				tiji = (0.866*duibian/10*changdu/10)*shuliang
+				if(!!midu && midu.trim()!=""){
+					try {
+						zhongliang = tiji*midu/1000;
+						console.log("midu : "+midu)
+						console.log(zhongliang)
+						console.log(tiji*midu)
+					}
+					catch(err){
+						toastr.warning("密度必填！");
+						return;
+					}
+
+				}
+				if(!danjia || danjia.trim()==""){
+					toastr.warning("单价必填，请重新输入！");
+					return;
+				}
+				if(!shuliang || shuliang.trim()==""||!Number.isInteger(shuliang/1)){
+					toastr.warning("数量必填，且只能输入整数，请重新输入！");
+					return;
+				}
+				zongjia = danjia*zhongliang;
+			}
+
+			$("#input_tiji").val(tiji);
+			$("#input_zhongliang").val(zhongliang);
+			$("#input_zongjia").val(zongjia);
+		}
